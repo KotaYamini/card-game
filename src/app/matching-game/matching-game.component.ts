@@ -55,12 +55,13 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 
   private handleSolvedAssignment(pair: Pair): void {
     this.solvedPairs.push(pair);
-    // this.remove(this.unsolvedPairs, pair);
+    this.remove(this.unsolvedPairs, pair);
     this.leftPartUnselected.emit();
     this.rightPartUnselected.emit();
     //workaround to force update of the shuffle pipe
     this.test = Math.random() * 10;
   }
+
   private handleFailedAssignment(side1: string): void {
 
     if (side1 == "left") {
@@ -69,6 +70,10 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
       this.rightPartUnselected.emit();
     }
 
+  }
+
+  remove(unsolvedArray: Pair[], pair: Pair) {
+    return unsolvedArray.splice(0, pair.id);
   }
 
 
