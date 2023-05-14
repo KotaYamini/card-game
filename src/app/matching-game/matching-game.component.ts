@@ -1,7 +1,7 @@
 import { Component, ContentChild, EventEmitter, Input, OnInit, Output, OnDestroy, TemplateRef } from '@angular/core';
 import { Pair } from '../models/pair';
-import { Observable, Subject, Subscription, filter, pairwise } from 'rxjs';
-import { partition, map } from 'rxjs/operators';
+import { EMPTY, Observable, Subject, Subscription, filter, from, iif, of, pairwise } from 'rxjs';
+import { map, mergeAll, partition } from 'rxjs/operators';
 @Component({
   selector: 'app-matching-game',
   templateUrl: './matching-game.component.html',
@@ -37,10 +37,21 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
       filter(comb => comb[0].side != comb[1].side)
     );
 
-    console.log(stream);
 
-    const [stream1, stream2] = partition((comb: any) =>
+    const [stream1, stream2]: any = partition((comb: any) =>
       comb[0].pair === comb[1].pair)(stream);
+
+
+    // const [stream1, stream2]: any = stream.pipe(
+    //   map((comb: any) => {
+    //     return iif(
+    //       () => comb[0].pair === comb[1].pair,
+    //       of([comb]),
+    //       EMPTY
+    //     );
+    //   }),
+    //   mergeAll() // flatten the nested observables into a single observable
+    // );
 
     this.solvedStream = stream1.pipe(
       map((comb: any) => comb[0].pair)
@@ -60,7 +71,6 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
     this.remove(this.unsolvedPairs, pair);
     this.leftPartUnselected.emit();
     this.rightPartUnselected.emit();
-    //workaround to force update of the shuffle pipe
     this.test = Math.random() * 10;
   }
 
