@@ -37,6 +37,8 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
       filter(comb => comb[0].side != comb[1].side)
     );
 
+    console.log(stream);
+
     const [stream1, stream2] = partition((comb: any) =>
       comb[0].pair === comb[1].pair)(stream);
 
