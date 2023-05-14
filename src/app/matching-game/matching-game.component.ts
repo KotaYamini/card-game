@@ -1,7 +1,7 @@
 import { Component, ContentChild, EventEmitter, Input, OnInit, Output, OnDestroy, TemplateRef } from '@angular/core';
 import { Pair } from '../models/pair';
 import { EMPTY, Observable, Subject, Subscription, filter, from, iif, of, pairwise } from 'rxjs';
-import { map, mergeAll, partition } from 'rxjs/operators';
+import { map, mergeAll, mergeMap, partition } from 'rxjs/operators';
 @Component({
   selector: 'app-matching-game',
   templateUrl: './matching-game.component.html',
@@ -42,15 +42,14 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
       comb[0].pair === comb[1].pair)(stream);
 
 
-    // const [stream1, stream2]: any = stream.pipe(
-    //   map((comb: any) => {
+    // const [stream1, stream2]:any = from(stream).pipe(
+    //   mergeMap((comb: any) => {
     //     return iif(
     //       () => comb[0].pair === comb[1].pair,
     //       of([comb]),
     //       EMPTY
     //     );
     //   }),
-    //   mergeAll() // flatten the nested observables into a single observable
     // );
 
     this.solvedStream = stream1.pipe(
@@ -62,8 +61,8 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 
     this.s_Subscription = this.solvedStream.subscribe(pair =>
       this.handleSolvedAssignment(pair));
-    this.f_Subscription = this.failedStream.subscribe((pair) =>
-      this.handleFailedAssignment(pair));
+    this.f_Subscription = this.failedStream.subscribe((side) =>
+      this.handleFailedAssignment(side));
   }
 
   private handleSolvedAssignment(pair: Pair): void {
