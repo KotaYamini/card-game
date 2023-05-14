@@ -85,7 +85,9 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 
   remove(unsolvedArray: Pair[], pair: Pair) {
     const objWithIdIndex = unsolvedArray.findIndex((obj) => obj.id === pair.id);
-    return unsolvedArray.splice(0, objWithIdIndex);
+    if (objWithIdIndex !== -1) {
+      unsolvedArray.splice(objWithIdIndex, 1);
+    }
   }
 
 
