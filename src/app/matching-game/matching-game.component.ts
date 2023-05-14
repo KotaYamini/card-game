@@ -75,7 +75,6 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
   }
 
   private handleFailedAssignment(side1: string): void {
-
     if (side1 == "left") {
       this.leftPartUnselected.emit();
     } else {
@@ -85,7 +84,8 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
   }
 
   remove(unsolvedArray: Pair[], pair: Pair) {
-    return unsolvedArray.splice(0, pair.id);
+    const objWithIdIndex = unsolvedArray.findIndex((obj) => obj.id === pair.id);
+    return unsolvedArray.splice(0, objWithIdIndex);
   }
 
 
