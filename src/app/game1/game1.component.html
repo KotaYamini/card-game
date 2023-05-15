@@ -7,10 +7,14 @@
     (leftpartUnselected)="onLeftpartUnselected()"
     (rightpartUnselected)="onRightpartUnselected()"
   >
-    <button>{{ animalPair?.leftpart }}</button>
+    <button [class.selected]="leftpartSelectedId == animalPair.id">
+      {{ animalPair?.leftpart }}
+    </button>
   </ng-template>
 
   <ng-template #rightpart let-animalPair="contextPair">
-    <button>{{ animalPair?.rightpart }}</button>
+    <button [class.selected]="rightpartSelectedId == animalPair.id">
+      {{ animalPair?.rightpart }}
+    </button>
   </ng-template>
 </app-matching-game>
