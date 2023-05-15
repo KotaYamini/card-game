@@ -1,6 +1,6 @@
 # CardGame
 
-![image](https://github.com/KotaYamini/card-game/assets/48117959/04dba517-0369-4bc3-a987-fe7978fa6251)
+![image](https://github.com/KotaYamini/card-game/assets/48117959/fb043600-515a-4268-ad70-4b9ed3e28547)
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
