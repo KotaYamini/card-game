@@ -1,12 +1,11 @@
-<app-matching-game [pairs]="animals">
-  <ng-template
-    #leftpart
-    let-animalPair="contextPair"
-    (leftPartSelected)="leftpartSelectedId($event)"
-    (rightpartSelected)="onRightpartSelected($event)"
-    (leftpartUnselected)="onLeftpartUnselected()"
-    (rightpartUnselected)="onRightpartUnselected()"
-  >
+<app-matching-game
+  [pairs]="animals"
+  (leftPartSelected)="onLeftpartSelected($event)"
+  (rightPartSelected)="onRightpartSelected($event)"
+  (leftpartUnselected)="onLeftpartUnselected()"
+  (rightpartUnselected)="onRightpartUnselected()"
+>
+  <ng-template #leftpart let-animalPair="contextPair">
     <button [class.selected]="leftpartSelectedId == animalPair.id">
       {{ animalPair?.leftpart }}
     </button>
