@@ -1,7 +1,6 @@
-.selected {
-  border: 3px solid red;
-  background-color: white;
+.selected:focus {
   color: black;
+  font-weight: 700;
 }
 
 button,
