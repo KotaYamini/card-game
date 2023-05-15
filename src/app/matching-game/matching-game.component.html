@@ -30,7 +30,7 @@
 </div>
 
 <div class="container solved" *ngIf="solvedPairs.length > 0">
-  <div *ngFor="let pair of solvedPairs; let i = index" class="pair_items left">
+  <div *ngFor="let pair of solvedPairs; let i = index" class="pair_items">
     <button>{{ pair.leftpart }}</button>
     <div class="connector"></div>
     <button>{{ pair.rightpart }}</button>
